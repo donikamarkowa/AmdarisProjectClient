@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { LoginUserDto, login as apiLogin } from '../services/apiService';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
+  login: (loginUser: LoginUserDto) => Promise<void>;
   // logout: () => void;
 }
 
@@ -23,9 +24,18 @@ export const useAuth = () => {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = () => {
-    setIsAuthenticated(true);
-    console.log('User logged in:', isAuthenticated);
+  // const login = () => {
+  //   setIsAuthenticated(true);
+  //   console.log('User logged in:', isAuthenticated);
+  // };
+  const login = async (loginUser: LoginUserDto) => {
+    try {
+      await apiLogin(loginUser);
+      setIsAuthenticated(true);
+      console.log('User logged in:', isAuthenticated);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   // const logout = () => {
