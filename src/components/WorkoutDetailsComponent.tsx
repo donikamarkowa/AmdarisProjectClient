@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getWorkoutDetails, WorkoutDetailsDto } from '../services/workoutService';
 import { useAuth } from '../contexts/AuthContext';
+import LocationComponent from './LocationComponent'; 
 
 
 const WorkoutDetails: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+    const { id: workoutId } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const { authToken} = useAuth();
     const [workout, setWorkout] = useState<WorkoutDetailsDto | null>(null);
@@ -27,14 +28,14 @@ const WorkoutDetails: React.FC = () => {
                 }
             };
             
-            if (id) {
-                fetchWorkoutDetails(id);
+            if (workoutId) {
+                fetchWorkoutDetails(workoutId);
             } else {
                 console.error('No workout ID provided.');
                 navigate('/workouts');
             }
         }
-    }, [authToken, id, navigate]);
+    }, [authToken, workoutId, navigate]);
 
     if (!authToken) {
         return <div>Please log in to view workout details.</div>;
@@ -60,6 +61,8 @@ const WorkoutDetails: React.FC = () => {
             <p>Status: {workout.status}</p>
             <p>Price: {workout.price}</p>
             <p>Category: {workout.workoutCategory}</p>
+
+            <LocationComponent workoutId={workoutId!} />
         </div>
     );
 };
