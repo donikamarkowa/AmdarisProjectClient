@@ -20,7 +20,7 @@ const Login: React.FC = () => {
 
         try {
             await login(loginUser);
-            navigate('/profile/edit');
+            navigate('/');
         } catch (error) {
             console.error('Error logging in:', error);
         }
