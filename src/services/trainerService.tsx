@@ -18,33 +18,31 @@ export interface TrainerDetailsDto {
   id: string;
   firstName: string;
   lastName: string;
-  age: number;
-  bio: string;
-  weight: number;
-  height: number;
+  age?: number;
+  bio?: string;
+  weight?: number;
+  height?: number;
   picture: string;
-  phoneNumber: string;
+  phoneNumber?: string;
 }
 
 
-export const getTrainers = async (paginationParameters: PaginationParameters): Promise<TrainerDto[]> => {
-  const token = localStorage.getItem('token');
+export const getTrainers = async (paginationParameters: PaginationParameters, authToken: string): Promise<TrainerDto[]> => {
   const response = await axios.get<TrainerDto[]>(`${API_URL}/Trainer/all`, {
-      params: paginationParameters,
-      headers: {
-          Authorization: `Bearer ${token}`
-      }
+    params: paginationParameters,
+    headers: {
+      Authorization: `Bearer ${authToken}` 
+    }
   });
   return response.data;
 };
 
-export const getTrainerDetails = async (id: string): Promise<TrainerDetailsDto> => {
-  const token = localStorage.getItem('token');
+export const getTrainerDetails = async (id: string, authToken: string): Promise<TrainerDetailsDto> => {
   const response = await axios.get<TrainerDetailsDto>(`${API_URL}/Trainer/details?id=${id}`, {
-      params: { id },
-      headers: {
-          Authorization: `Bearer ${token}`
-      }
+    params: { id },
+    headers: {
+      Authorization: `Bearer ${authToken}` 
+    }
   });
   return response.data;
 };
