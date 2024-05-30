@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getWorkouts, WorkoutDto, PaginationParameters  } from '../services/workoutService';
+import { useAuth } from '../contexts/AuthContext';
 
 const Workouts: React.FC = () => {
     const [workouts, setWorkouts] = useState<WorkoutDto[]>([]);
@@ -8,12 +9,13 @@ const Workouts: React.FC = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [pageSize] = useState(6);
     const navigate = useNavigate();
+    const { authToken } = useAuth(); 
 
     useEffect(() => {
         const fetchWorkouts = async () => {
             try {
               const paginationParameters: PaginationParameters = { pageNumber, pageSize };
-                const workoutsData = await getWorkouts(paginationParameters);
+                const workoutsData = await getWorkouts(paginationParameters, authToken!);
                 setWorkouts(workoutsData);
             } catch (error) {
                 console.error('Error fetching workouts:', error);
@@ -23,7 +25,7 @@ const Workouts: React.FC = () => {
         };
 
         fetchWorkouts();
-    }, [pageNumber, pageSize]);
+    }, [pageNumber, pageSize, authToken]);
 
     const handleNextPage = () => {
       setPageNumber(prevPage => prevPage + 1);
@@ -35,8 +37,17 @@ const Workouts: React.FC = () => {
       }
   };
 
-  const handleWorkoutClick = (id: string) => {
-    navigate(`/workout/details/${id}`);
+//   const handleWorkoutClick = (id: string) => {
+//     navigate(`/workout/details/${id}`);
+// };
+
+const handleWorkoutClick = (id: string) => {
+    if (authToken) {
+        navigate(`/workout/details/${id}`);
+    } else {
+        console.error('Authentication token is null');
+        // Handle the case where authToken is null, such as showing an error message or redirecting to the login page
+    }
 };
 
 
