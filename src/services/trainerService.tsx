@@ -9,6 +9,12 @@ export interface TrainerDto {
   picture: string;
 }
 
+export interface TrainerFullNameDto {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface PaginationParameters{
   pageNumber: number;
   pageSize: number
@@ -42,6 +48,15 @@ export const getTrainerDetails = async (id: string, authToken: string): Promise<
     params: { id },
     headers: {
       Authorization: `Bearer ${authToken}` 
+    }
+  });
+  return response.data;
+};
+
+export const getTrainersByLocationId = async (locationId: string, authToken: string): Promise<TrainerDto[]> => {
+  const response = await axios.get<TrainerDto[]>(`${API_URL}/Trainer/location?id=${locationId}`, {
+    headers: {
+      Authorization: `Bearer ${authToken}`
     }
   });
   return response.data;
