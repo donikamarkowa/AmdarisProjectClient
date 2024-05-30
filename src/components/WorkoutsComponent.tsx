@@ -37,16 +37,12 @@ const Workouts: React.FC = () => {
       }
   };
 
-//   const handleWorkoutClick = (id: string) => {
-//     navigate(`/workout/details/${id}`);
-// };
 
 const handleWorkoutClick = (id: string) => {
     if (authToken) {
         navigate(`/workout/details/${id}`);
     } else {
         console.error('Authentication token is null');
-        // Handle the case where authToken is null, such as showing an error message or redirecting to the login page
     }
 };
 
