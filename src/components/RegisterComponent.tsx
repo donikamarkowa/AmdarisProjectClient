@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RegisterUserDto, register, getRoles, RoleDto } from '../services/apiService';
+import { useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ const Register: React.FC = () => {
     const [gender, setGender] = useState('');
     const [roleId, setRoleId] = useState('');
     const [roles, setRoles] = useState<RoleDto[]>([]);
+    const navigate = useNavigate();
 
      useEffect(() => {
         const fetchRoles = async () => {
@@ -37,6 +39,7 @@ const Register: React.FC = () => {
 
         try {
             const result = await register(registerUser);
+            navigate('/profile/edit');
             console.log('Registration successful:', result);
         } catch (error) {
             console.error('Error registering user:', error);
