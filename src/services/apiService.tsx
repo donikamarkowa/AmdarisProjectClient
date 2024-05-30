@@ -52,7 +52,12 @@ export const getRoles = async (): Promise<RoleDto[]> => {
     return response.data;
 };
 
-export const editProfile = async(editProfile: EditProfileDto): Promise<EditProfileDto> =>{
-    const response = await axios.post<EditProfileDto>(`${API_URL}/edit`, editProfile);
+export const editProfile = async(editProfile: EditProfileDto, authToken: string): Promise<EditProfileDto> =>{
+    const response = await axios.post<EditProfileDto>(`${API_URL}/edit`, editProfile, {
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    });
+
     return response.data;
 }
