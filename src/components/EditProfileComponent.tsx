@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { editProfile, EditProfileDto } from '../services/apiService';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfileForm: React.FC = () => {
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   console.log('isAuthenticated state:', isAuthenticated);
+
   const [formData, setFormData] = useState<EditProfileDto>({
     age: undefined,
     bio: '',
@@ -23,11 +26,16 @@ const EditProfileForm: React.FC = () => {
     e.preventDefault();
     try {
       await editProfile(formData);
+      navigate('/home');
     } catch (error) {
       console.error('Error editing profile:', error);
     }
   };
 
+  const handleCancel = () => {
+    navigate('/'); 
+  };
+  
   return (
     <div>
       {isAuthenticated ? (
@@ -57,6 +65,7 @@ const EditProfileForm: React.FC = () => {
             <input type="text" name="picture" value={formData.picture} onChange={handleChange} />
           </label>
           <button type="submit">Save Changes</button>
+          <button type="button" onClick={handleCancel}>Cancel</button>
         </form>
       ) : (
         <div>Please log in to edit your profile.</div>
@@ -64,5 +73,6 @@ const EditProfileForm: React.FC = () => {
     </div>
   );
 };
+
 
 export default EditProfileForm;
