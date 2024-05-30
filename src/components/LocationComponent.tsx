@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { getLocationsByWorkoutId, LocationDto } from '../services/locationService';
 import { getTrainersByLocationId, TrainerFullNameDto } from '../services/trainerService';
+import { getAllSchedules, ScheduleDto } from '../services/scheduleService';
 
 interface LocationComponentProps {
   workoutId: string;
 }
 
-const LocationComponent: React.FC<LocationComponentProps> = ({ workoutId }) => {
+const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
   const { authToken } = useAuth();
   const [locations, setLocations] = useState<LocationDto[]>([]);
   const [selectedCity, setSelectedCity] = useState<string>('');
@@ -15,6 +16,8 @@ const LocationComponent: React.FC<LocationComponentProps> = ({ workoutId }) => {
   const [selectedLocationId, setSelectedLocationId] = useState<string>('');
   const [trainers, setTrainers] = useState<TrainerFullNameDto[]>([]);
   const [selectedTrainer, setSelectedTrainer] = useState<string>('');
+  const [schedules, setSchedules] = useState<ScheduleDto[]>([]);
+  const [selectedSchedule, setSelectedSchedule] = useState<string>('');
 
   useEffect(() => {
     const fetchLocationsData = async () => {
@@ -27,22 +30,61 @@ const LocationComponent: React.FC<LocationComponentProps> = ({ workoutId }) => {
     fetchLocationsData();
   }, [workoutId, authToken]);
 
+  useEffect(() => {
+    const fetchTrainersData = async () => {
+      if (authToken && selectedLocationId) {
+        const trainersData = await getTrainersByLocationId(selectedLocationId, authToken);
+        setTrainers(trainersData);
+      }
+    };
+
+    fetchTrainersData();
+  }, [selectedLocationId, authToken]);
+
+  useEffect(() => {
+    const fetchSchedulesData = async () => {
+      if (authToken && selectedTrainer) {
+        const schedulesData = await getAllSchedules(selectedTrainer, workoutId, selectedLocationId, authToken);
+        setSchedules(schedulesData);
+      }
+    };
+
+    fetchSchedulesData();
+  }, [selectedTrainer, authToken]);
+
   const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCity(event.target.value);
     setSelectedAddress('');
     setSelectedLocationId('');
     setTrainers([]);
+    setSchedules([]);
   };
 
-  const handleAddressChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleAddressChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const address = event.target.value;
     setSelectedAddress(address);
     const location = locations.find(loc => loc.city === selectedCity && loc.address === address);
-    setSelectedLocationId(location?.id || '');
+    if (location) {
+      setSelectedLocationId(location.id);
+      try {
+        if (authToken) {
+          const trainersData = await getTrainersByLocationId(location.id, authToken);
+          setTrainers(trainersData);
+          setSchedules([]);
+        }
+      } catch (error) {
+        console.error('Error fetching trainers:', error);
+      }
+    }
   };
 
-  const handleTrainerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTrainer(event.target.value);
+  const handleTrainerChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const trainerId = event.target.value;
+    setSelectedTrainer(trainerId);
+  };
+
+  const handleScheduleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedSchedule(event.target.value);
   };
 
   useEffect(() => {
@@ -55,6 +97,21 @@ const LocationComponent: React.FC<LocationComponentProps> = ({ workoutId }) => {
 
     fetchTrainersData();
   }, [selectedLocationId, authToken]);
+
+  useEffect(() => {
+    const fetchSchedulesData = async () => {
+      if (authToken && selectedTrainer) {
+        try {
+          const schedulesData = await getAllSchedules(selectedTrainer, workoutId, selectedLocationId, authToken);
+          setSchedules(schedulesData);
+        } catch (error) {
+          console.error('Error fetching schedules:', error);
+        }
+      }
+    };
+
+    fetchSchedulesData();
+  }, [selectedTrainer, authToken, workoutId, selectedLocationId]);
 
   const cities = Array.from(new Set(locations.map(location => location.city)));
   const filteredAddresses = locations.filter(location => location.city === selectedCity);
@@ -100,8 +157,22 @@ const LocationComponent: React.FC<LocationComponentProps> = ({ workoutId }) => {
           </select>
         </div>
       )}
+
+      {selectedTrainer && (
+        <div>
+          <label htmlFor="schedule">Schedule:</label>
+          <select id="schedule" value={selectedSchedule} onChange={handleScheduleChange}>
+            <option value="">Select a schedule</option>
+            {schedules.map(schedule => (
+              <option key={schedule.id} value={schedule.id}>
+                {schedule.date}  {schedule.time}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
     </div>
   );
 };
 
-export default LocationComponent;
+export default Location;
