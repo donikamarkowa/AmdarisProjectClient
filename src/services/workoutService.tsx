@@ -27,24 +27,22 @@ export interface WorkoutDetailsDto {
   workoutCategory: string;
 }
 
-export const getWorkouts = async (paginationParameters: PaginationParameters): Promise<WorkoutDto[]> => {
-  const token = localStorage.getItem('token');
+export const getWorkouts = async (paginationParameters: PaginationParameters,  authToken: string): Promise<WorkoutDto[]> => {
   const response = await axios.get<WorkoutDto[]>(`${API_URL}/Workout/all`, {
-      params: paginationParameters,
-      headers: {
-          Authorization: `Bearer ${token}`
-      }
+    params: paginationParameters,
+    headers: {
+      Authorization: `Bearer ${authToken}` 
+    }
   });
   return response.data;
 };
 
-export const getWorkoutDetails = async (id: string): Promise<WorkoutDetailsDto> => {
-  const token = localStorage.getItem('token');
-  const response = await axios.get<WorkoutDetailsDto>(`${API_URL}/Workout/details?id=${id}`, {
+export const getWorkoutDetails = async (id: string, authToken: string): Promise<WorkoutDetailsDto> => {
+    const response = await axios.get<WorkoutDetailsDto>(`${API_URL}/Workout/details?id=${id}`, {
       params: { id },
       headers: {
-          Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${authToken}` 
       }
-  });
-  return response.data;
+    });
+    return response.data;
 };
