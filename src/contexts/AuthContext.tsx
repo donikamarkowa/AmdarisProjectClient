@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode} from 'react';
 import { LoginUserDto, login as apiLogin } from '../services/apiService';
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  authToken: string | null;
   login: (loginUser: LoginUserDto) => Promise<void>;
   // logout: () => void;
 }
@@ -23,16 +24,18 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authToken, setAuthToken] = useState<string | null>(null); 
 
-  // const login = () => {
-  //   setIsAuthenticated(true);
-  //   console.log('User logged in:', isAuthenticated);
-  // };
   const login = async (loginUser: LoginUserDto) => {
     try {
-      await apiLogin(loginUser);
-      setIsAuthenticated(true);
-      console.log('User logged in:', isAuthenticated);
+      const authResult = await apiLogin(loginUser);
+      if (authResult.token) {
+        setIsAuthenticated(true);
+        setAuthToken(authResult.token); 
+        console.log('User logged in:', isAuthenticated);
+      } else {
+        console.error('Login failed: No token received');
+      }
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -44,6 +47,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const value: AuthContextType = {
     isAuthenticated,
+    authToken,
     login,
     // logout
   };
