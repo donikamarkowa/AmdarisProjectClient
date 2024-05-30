@@ -1,39 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getWorkoutDetails, WorkoutDetailsDto } from '../services/workoutService';
+import { useAuth } from '../contexts/AuthContext';
 
 
 const WorkoutDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
+    const { authToken} = useAuth();
     const [workout, setWorkout] = useState<WorkoutDetailsDto | null>(null);
     const [loading, setLoading] = useState(true);
 
+
     useEffect(() => {
-        const fetchWorkoutDetails = async (workoutId: string) => {
-            try {
-                const workoutData = await getWorkoutDetails(workoutId);
-                setWorkout(workoutData);
-            } catch (error) {
-                console.error('Error fetching workout details:', error);
-            } finally {
-                setLoading(false);
+        if (!authToken) {
+            navigate('/workouts');
+        } else {
+            const fetchWorkoutDetails = async (workoutId: string) => {
+                try {
+                    const workoutData = await getWorkoutDetails(workoutId, authToken!);
+                    setWorkout(workoutData);
+                } catch (error) {
+                    console.error('Error fetching workout details:', error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+            
+            if (id) {
+                fetchWorkoutDetails(id);
+            } else {
+                console.error('No workout ID provided.');
+                navigate('/workouts');
             }
-        };
+        }
+    }, [authToken, id, navigate]);
 
-        if (id) {
-          fetchWorkoutDetails(id);
-      } else {
-          console.error('No workout ID provided.');
-          navigate('/workouts'); 
-      }
-  }, [id, navigate]);
-
-  useEffect(() => {
-    if (!workout && !loading) {
-        navigate('/workouts');
+    if (!authToken) {
+        return <div>Please log in to view workout details.</div>;
     }
-}, [workout, loading, navigate]);
 
     if (loading) {
         return <div>Loading...</div>;
