@@ -47,7 +47,6 @@ export const login = async (loginUser: LoginUserDto): Promise<AuthResultDto> => 
     return response.data;
 };
 
-
 export const getRoles = async (): Promise<RoleDto[]> => {
     const response = await axios.get<RoleDto[]>(`${API_URL}/getRoles`);
     return response.data;
