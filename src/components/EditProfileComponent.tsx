@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const EditProfileForm: React.FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, authToken } = useAuth();
   const navigate = useNavigate();
   console.log('isAuthenticated state:', isAuthenticated);
 
@@ -25,8 +25,8 @@ const EditProfileForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await editProfile(formData);
-      navigate('/home');
+      await editProfile(formData, authToken!);
+      navigate('/');
     } catch (error) {
       console.error('Error editing profile:', error);
     }
