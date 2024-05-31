@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getLocationsByWorkoutId, LocationDto } from '../services/locationService';
 import { getTrainersByLocationId, TrainerFullNameDto } from '../services/trainerService';
@@ -11,6 +12,7 @@ interface LocationComponentProps {
 
 const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
   const { authToken } = useAuth();
+  const navigate = useNavigate();
   const [locations, setLocations] = useState<LocationDto[]>([]);
   const [selectedCity, setSelectedCity] = useState<string>('');
   const [selectedAddress, setSelectedAddress] = useState<string>('');
@@ -19,6 +21,7 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
   const [selectedTrainer, setSelectedTrainer] = useState<string>('');
   const [schedules, setSchedules] = useState<ScheduleDto[]>([]);
   const [selectedSchedule, setSelectedSchedule] = useState<string>('');
+  
 
   useEffect(() => {
     const fetchLocationsData = async () => {
@@ -51,7 +54,7 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
     };
 
     fetchSchedulesData();
-  }, [selectedTrainer, authToken]);
+  }, [selectedTrainer, authToken, workoutId, selectedLocationId]);
 
   const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCity(event.target.value);
@@ -123,6 +126,11 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
     }
   };
 
+  const handleCancelBooking = () => {
+    setSelectedSchedule('');
+    navigate('/workouts');
+  };
+
   const cities = Array.from(new Set(locations.map(location => location.city)));
   const filteredAddresses = locations.filter(location => location.city === selectedCity);
 
@@ -185,6 +193,7 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
       {selectedSchedule && (
       <div>
         <button onClick={handleBookingConfirmation}>Confirm Booking</button>
+        <button onClick={handleCancelBooking}>Cancel Booking</button>
       </div>
       )}
     </div>
