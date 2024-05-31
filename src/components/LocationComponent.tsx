@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { getLocationsByWorkoutId, LocationDto } from '../services/locationService';
 import { getTrainersByLocationId, TrainerFullNameDto } from '../services/trainerService';
 import { getAllSchedules, ScheduleDto } from '../services/scheduleService';
+import { createBooking } from '../services/bookingService';
 
 interface LocationComponentProps {
   workoutId: string;
@@ -84,7 +85,8 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
   };
 
   const handleScheduleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedSchedule(event.target.value);
+    const scheduleId = event.target.value;
+    setSelectedSchedule(scheduleId);
   };
 
   useEffect(() => {
@@ -112,6 +114,14 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
 
     fetchSchedulesData();
   }, [selectedTrainer, authToken, workoutId, selectedLocationId]);
+
+  const handleBookingConfirmation = async () => {
+    try {
+      await createBooking(workoutId, selectedSchedule);
+    } catch (error) {
+      console.error('Error creating booking:', error);
+    }
+  };
 
   const cities = Array.from(new Set(locations.map(location => location.city)));
   const filteredAddresses = locations.filter(location => location.city === selectedCity);
@@ -171,8 +181,14 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
           </select>
         </div>
       )}
+
+      {selectedSchedule && (
+      <div>
+        <button onClick={handleBookingConfirmation}>Confirm Booking</button>
+      </div>
+      )}
     </div>
-  );
+);
 };
 
 export default Location;
