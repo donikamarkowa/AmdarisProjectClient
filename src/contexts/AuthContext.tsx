@@ -32,7 +32,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (authResult.token) {
         setIsAuthenticated(true);
         setAuthToken(authResult.token); 
-        console.log('User logged in:', isAuthenticated);
+        localStorage.setItem( 'token', authResult.token);
       } else {
         console.error('Login failed: No token received');
       }
