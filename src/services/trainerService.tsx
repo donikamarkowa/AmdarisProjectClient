@@ -61,3 +61,12 @@ export const getTrainersByLocationId = async (locationId: string, authToken: str
   });
   return response.data;
 };
+
+export const fetchTrainers = async (authToken: string): Promise<TrainerFullNameDto[]> =>{
+  const response = await axios.get<TrainerFullNameDto[]>(`${API_URL}/Trainer/allNames`, {
+    headers: {
+      Authorization: `Bearer ${authToken}` 
+    }
+  });
+  return response.data;
+};
