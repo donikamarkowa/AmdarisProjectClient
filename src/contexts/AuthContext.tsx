@@ -37,7 +37,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.error('Login failed: No token received');
       }
     } catch (error) {
-      console.error('Login failed:', error);
+      const unknownError = error as Error;
+      console.error('Login failed:', unknownError.message);
     }
   };
 
