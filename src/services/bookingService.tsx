@@ -9,3 +9,4 @@ export const createBooking = async (workoutId: string, scheduleId: string): Prom
     }
   });
 };
+
