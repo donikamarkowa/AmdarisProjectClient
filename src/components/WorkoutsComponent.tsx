@@ -108,6 +108,7 @@ const Workouts: React.FC = () => {
         return <div>Loading...</div>;
     }
 
+
     return (
         <div className="workouts-container">
         <h2>All Workouts</h2>
