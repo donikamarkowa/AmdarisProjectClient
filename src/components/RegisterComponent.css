@@ -2,53 +2,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  max-width: 400px;
-  margin: 0 auto;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+  max-width: 400px; 
+  margin: 0 auto; 
+  background-color: #f5f5f5; 
 }
 
-h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+.register-title {
+  margin-bottom: 1rem;
+  font-size: 1.5rem; 
+  font-weight: bold; 
 }
 
 .register-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  width: 100%; 
 }
 
-.register-form input,
-.register-form select {
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+.MuiTextField-root {
+  margin-bottom: 1rem; 
 }
 
-.register-form input:focus,
-.register-form select:focus {
-  border-color: #007bff;
-  outline: none;
+.MuiSelect-root {
+  margin-bottom: 1rem; 
 }
 
-.register-form button {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
+.register-button {
+  width: 100%; 
+  margin-top: 1rem; 
+}
+
+.MuiButton-contained {
   background-color: #007bff;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.register-form button:hover {
-  background-color: #0056b3;
+  color: #fff; 
+  &:hover {
+    background-color: #0069d9; 
+  }
 }
