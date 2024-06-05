@@ -39,7 +39,8 @@ const Register: React.FC = () => {
         fetchRoles();
     }, []);
 
-    const handleRegister = async () => {
+    const handleRegister = async (e: any) => {
+      e.preventDefault();
         const registerUser: RegisterUserDto = {
             email,
             password,
@@ -53,8 +54,13 @@ const Register: React.FC = () => {
 
         try {
             const result = await register(registerUser);
-            navigate('/profile/edit');
-            console.log('Registration successful:', result);
+            if(result){
+                localStorage.setItem('token', result.token);
+                navigate('/login');
+                console.log('Registration successful:', result);
+            } else {
+              console.error('Error: No token received');
+          }
         } catch (error) {
             console.error('Error registering user:', error);
         }
