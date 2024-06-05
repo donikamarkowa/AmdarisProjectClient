@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { LoginUserDto} from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import './LoginComponent.css';
 import {
     TextField,
     Button,
