@@ -5,7 +5,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   authToken: string | null;
   login: (loginUser: LoginUserDto) => Promise<void>;
-  // logout: () => void;
+  //logout: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -42,15 +42,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // const logout = () => {
-  //   setIsAuthenticated(false);
+  // const logout = async (authToken) => {
+  //   try {
+  //     await logout(authToken); 
+  //     localStorage.removeItem('token');
+  //     setIsAuthenticated(false);
+  //     setAuthToken(null);
+  //   } catch (error) {
+  //     console.error('Logout failed:', error);
+  //   }
   // };
+
 
   const value: AuthContextType = {
     isAuthenticated,
     authToken,
     login,
-    // logout
+    //logout
   };
   
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
