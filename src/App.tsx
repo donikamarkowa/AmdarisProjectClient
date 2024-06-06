@@ -11,6 +11,8 @@ import WorkoutDetailsComponent from './components/WorkoutDetailsComponent';
 import TrainerComponent from './components/TrainerComponent';
 import TrainerDetailsComponent from './components/TrainerDetailsComponent'
 import EditProfileComponent from './components/EditProfileComponent';
+import Layout from './Layout.tsx';
+import './global.css';
 
 
 const App: React.FC = () => {
@@ -18,6 +20,7 @@ const App: React.FC = () => {
         <Router>
             <AuthProvider>
                 <Routes>
+                <Route path="/" element={<Layout />}>
                   <Route path="/" Component={HomePage}/>
                   <Route path="/login" Component={LoginComponent} />
                   <Route path="/register" Component={RegisterComponent} />
@@ -26,6 +29,7 @@ const App: React.FC = () => {
                   <Route path="/workout/details/:id" Component={WorkoutDetailsComponent} />
                   <Route path="/trainers" Component={TrainerComponent} />
                   <Route path="/trainer/details/:id" Component={TrainerDetailsComponent} />
+                </Route>
                 </Routes>
             </AuthProvider>
         </Router>
