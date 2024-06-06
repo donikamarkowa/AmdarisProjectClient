@@ -41,7 +41,7 @@ export const getWorkoutDetails = async (id: string, authToken: string): Promise<
     const response = await axios.get<WorkoutDetailsDto>(`${API_URL}/details?id=${id}`, {
       params: { id },
       headers: {
-        Authorization: `Bearer ${authToken}` 
+        Authorization: `Bearer ${localStorage.token}` 
       }
     });
     return response.data;

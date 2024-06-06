@@ -55,7 +55,7 @@ export const getRoles = async (): Promise<RoleDto[]> => {
 export const editProfile = async(editProfile: EditProfileDto, authToken: string): Promise<EditProfileDto> =>{
     const response = await axios.post<EditProfileDto>(`${API_URL}/edit`, editProfile, {
         headers: {
-            Authorization: `Bearer ${authToken}`
+            Authorization: `Bearer ${localStorage.token}`
         }
     });
 

@@ -23,7 +23,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [authToken, setAuthToken] = useState<string | null>(null); 
 
   const login = async (loginUser: LoginUserDto) => {

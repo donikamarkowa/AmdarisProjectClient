@@ -47,7 +47,7 @@ export const getTrainerDetails = async (id: string, authToken: string): Promise<
   const response = await axios.get<TrainerDetailsDto>(`${API_URL}/Trainer/details?id=${id}`, {
     params: { id },
     headers: {
-      Authorization: `Bearer ${authToken}` 
+      Authorization: `Bearer ${localStorage.token}` 
     }
   });
   return response.data;
@@ -65,7 +65,7 @@ export const getTrainersByLocationId = async (locationId: string, authToken: str
 export const fetchTrainers = async (authToken: string): Promise<TrainerFullNameDto[]> =>{
   const response = await axios.get<TrainerFullNameDto[]>(`${API_URL}/Trainer/allNames`, {
     headers: {
-      Authorization: `Bearer ${authToken}` 
+      Authorization: `Bearer ${localStorage.token}` 
     }
   });
   return response.data;
