@@ -81,7 +81,7 @@ const Workouts: React.FC = () => {
     };
 
     const handleWorkoutClick = (id: string) => {
-        if (authToken) {
+        if (localStorage.token) {
             navigate(`/workout/details/${id}`);
         } else {
             console.error('Authentication token is null');
@@ -131,7 +131,9 @@ const Workouts: React.FC = () => {
         </div>
             <div className="workouts-grid">
                 {workouts.map(workout => (
-                    <div key={workout.id} className="workout-card" onClick={() => handleWorkoutClick(workout.id)}>
+                    <div key={workout.id} className="workout-card" onClick={(e) => {
+                        e.preventDefault();
+                        handleWorkoutClick(workout.id)}}>
                         <img src={workout.picture} alt={workout.title} className="workout-image" />
                         <h3>{workout.title}</h3>
                     </div>

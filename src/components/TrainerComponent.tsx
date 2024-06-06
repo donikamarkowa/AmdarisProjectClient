@@ -39,7 +39,7 @@ const Trainers: React.FC = () => {
 
 
 const handleTrainerClick = (id: string) => {
-    if (authToken) {
+    if (localStorage.token) {
         navigate(`/trainer/details/${id}`);
     } else {
         console.error('Authentication token is null');

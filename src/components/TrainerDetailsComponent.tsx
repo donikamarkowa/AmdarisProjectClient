@@ -13,12 +13,12 @@ const TrainerDetails: React.FC = () => {
 
 
     useEffect(() => {
-        if (!authToken) {
+        if (!localStorage.token) {
             navigate('/trainers');
         } else {
             const fetchTrainerDetails = async (trainerId: string) => {
                 try {
-                    const trainerData = await getTrainerDetails(trainerId, authToken!);
+                    const trainerData = await getTrainerDetails(trainerId, localStorage.token);
                     setTrainer(trainerData);
                 } catch (error) {
                     console.error('Error fetching trainer details:', error);
@@ -36,7 +36,7 @@ const TrainerDetails: React.FC = () => {
         }
     }, [authToken, id, navigate]);
 
-    if (!authToken) {
+    if (!localStorage.token) {
         return <div>Please log in to view trainer details.</div>;
     }
 

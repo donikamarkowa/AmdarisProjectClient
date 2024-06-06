@@ -14,7 +14,7 @@ const WorkoutDetails: React.FC = () => {
 
 
     useEffect(() => {
-        if (!authToken) {
+        if (!localStorage.token) {
             navigate('/workouts');
         } else {
             const fetchWorkoutDetails = async (workoutId: string) => {
@@ -37,7 +37,7 @@ const WorkoutDetails: React.FC = () => {
         }
     }, [authToken, workoutId, navigate]);
 
-    if (!authToken) {
+    if (!localStorage.token) {
         return <div>Please log in to view workout details.</div>;
     }
 
