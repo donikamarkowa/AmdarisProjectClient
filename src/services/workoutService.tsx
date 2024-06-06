@@ -79,3 +79,13 @@ export const searchByTrainer = async (trainerId: string, authToken: string): Pro
   return response.data;
 };
 
+export const getCarouselPhotos = async (): Promise<string[]> => {
+  try {
+      const response = await axios.get<string[]>(`${API_URL}/photos`);
+      return response.data;
+  } catch (error) {
+      throw new Error('Error fetching carousel photos');
+  }
+};
+
+
