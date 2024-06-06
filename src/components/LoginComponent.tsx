@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { LoginUserDto} from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import './LoginComponent.css';
+import './LoginComponent.css'; 
 import {
     TextField,
     Button,
@@ -62,7 +62,7 @@ const Login: React.FC = () => {
             required
           />
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <Button variant="contained" disabled={isLoading} onClick={handleLogin}>
+            <Button variant="contained" disabled={isLoading} onClick={handleLogin} className="login-buton">
               {isLoading ? <CircularProgress size={24} color="secondary" /> : 'Login'}
             </Button>
           </Box>

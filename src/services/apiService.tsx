@@ -60,4 +60,4 @@ export const editProfile = async(editProfile: EditProfileDto, authToken: string)
     });
 
     return response.data;
-}
+};
