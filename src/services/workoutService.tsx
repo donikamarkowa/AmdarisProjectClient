@@ -8,6 +8,11 @@ export interface WorkoutDto {
     picture: string;
 }
 
+export interface WorkoutTitleDto{
+  id: string;
+  title: string;
+}
+
 export interface PaginationParameters{
     pageNumber: number;
     pageSize: number
@@ -86,6 +91,15 @@ export const getCarouselPhotos = async (): Promise<string[]> => {
   } catch (error) {
       throw new Error('Error fetching carousel photos');
   }
+};
+
+export const fetchWorkoutsTitles = async (authToken: string): Promise<WorkoutTitleDto[]> =>{
+  const response = await axios.get<WorkoutTitleDto[]>(`${API_URL}/titles`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.token}` 
+    }
+  });
+  return response.data;
 };
 
 
