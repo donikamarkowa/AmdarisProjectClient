@@ -25,8 +25,8 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
 
   useEffect(() => {
     const fetchLocationsData = async () => {
-      if (authToken) {
-        const locationsData = await getLocationsByWorkoutId(workoutId, authToken);
+      if (localStorage.token) {
+        const locationsData = await getLocationsByWorkoutId(workoutId, localStorage.token);
         setLocations(locationsData);
       }
     };
@@ -36,8 +36,8 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
 
   useEffect(() => {
     const fetchTrainersData = async () => {
-      if (authToken && selectedLocationId) {
-        const trainersData = await getTrainersByLocationId(selectedLocationId, authToken);
+      if (localStorage.token && selectedLocationId) {
+        const trainersData = await getTrainersByLocationId(selectedLocationId, localStorage.token);
         setTrainers(trainersData);
       }
     };
@@ -47,8 +47,8 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
 
   useEffect(() => {
     const fetchSchedulesData = async () => {
-      if (authToken && selectedTrainer) {
-        const schedulesData = await getAllSchedules(selectedTrainer, workoutId, selectedLocationId, authToken);
+      if (localStorage.token && selectedTrainer) {
+        const schedulesData = await getAllSchedules(selectedTrainer, workoutId, selectedLocationId, localStorage.token);
         setSchedules(schedulesData);
       }
     };
@@ -71,8 +71,8 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
     if (location) {
       setSelectedLocationId(location.id);
       try {
-        if (authToken) {
-          const trainersData = await getTrainersByLocationId(location.id, authToken);
+        if (localStorage.token) {
+          const trainersData = await getTrainersByLocationId(location.id, localStorage.token);
           setTrainers(trainersData);
           setSchedules([]);
         }
