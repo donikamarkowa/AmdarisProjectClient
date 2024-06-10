@@ -123,7 +123,7 @@ const Workouts: React.FC = () => {
           <select value={selectedTrainer} onChange={(e) => setSelectedTrainer(e.target.value)}>
             <option value="">All Trainers</option>
             {trainers.map(trainer => (
-              <option key={trainer.id} value={trainer.id}>{trainer.firstName}</option>
+              <option key={trainer.id} value={trainer.id}>{trainer.firstName} {trainer.lastName}</option>
             ))}
           </select>
           <button onClick={handleSearch}>Search</button>
