@@ -70,3 +70,27 @@ export const fetchTrainers = async (authToken: string): Promise<TrainerFullNameD
   });
   return response.data;
 };
+
+export const searchTrainers = async (criteria: string, paginationParameters: PaginationParameters, authToken: string): Promise<TrainerDto[]> => {
+  const response = await axios.get(`${API_URL}/Trainer/search?criteria=${criteria}`, {
+      headers: {
+          Authorization: `Bearer ${localStorage.token}`
+      },
+      params: {
+        params: { criteria, ...paginationParameters },
+      }
+  });
+  return response.data;
+};
+
+export const searchByWorkouts = async (workoutId: string, authToken: string): Promise<TrainerDto[]> => {
+  const response = await axios.get(`${API_URL}/Trainer/trainersByWorkout`, {
+    params: { id: workoutId},
+      headers: {
+          Authorization: `Bearer ${localStorage.token}`
+      },
+  });
+  return response.data;
+};
+
+
