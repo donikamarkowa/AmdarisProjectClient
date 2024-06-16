@@ -17,6 +17,11 @@
   align-items: center;
 }
 
+.header nav {
+  display: flex;
+  align-items: center;
+}
+
 .header nav a {
   margin: 0 10px;
   color: white;
@@ -25,6 +30,17 @@
 
 .header nav a:hover {
   text-decoration: underline;
+}
+
+.header nav button,
+.header nav button:hover,
+.header nav button:focus {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
 }
 
 .main {
