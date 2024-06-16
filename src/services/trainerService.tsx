@@ -83,7 +83,7 @@ export const searchTrainers = async (criteria: string, paginationParameters: Pag
   return response.data;
 };
 
-export const searchByWorkouts = async (workoutId: string, authToken: string): Promise<TrainerDto[]> => {
+export const searchByWorkout = async (workoutId: string, authToken: string): Promise<TrainerDto[]> => {
   const response = await axios.get(`${API_URL}/Trainer/trainersByWorkout`, {
     params: { id: workoutId},
       headers: {
@@ -92,5 +92,7 @@ export const searchByWorkouts = async (workoutId: string, authToken: string): Pr
   });
   return response.data;
 };
+
+
 
 
