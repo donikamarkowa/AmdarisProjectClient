@@ -1,8 +1,17 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import './Layout.css';
+import { useAuth } from './contexts/AuthContext';
 
 const Layout: React.FC = () => {
+    const { isAuthenticated, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/login');
+    };
+    
     return (
         <div className="layout">
             <header className="header">
@@ -13,7 +22,11 @@ const Layout: React.FC = () => {
                         <a href="/workouts">Workouts</a>
                         <a href="/trainers">Trainers</a>
                         <a href="/profile/edit">Profile</a>
-                        <a href="/login">Login</a>
+                        {isAuthenticated ? (
+                        <button onClick={handleLogout}>Logout</button>
+                        ) : (
+                        <Link to="/login">Login</Link>
+                        )}
                     </nav>
                 </div>
             </header>
