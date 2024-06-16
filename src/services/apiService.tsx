@@ -7,7 +7,6 @@ export interface RegisterUserDto {
     password: string;
     firstName: string;
     lastName: string;
-    gender: string;
     role: {
         id: string;
     };
@@ -18,8 +17,16 @@ export interface LoginUserDto {
     password: string;
 }
 
+export interface User{
+    id: string;
+    firstName: string;
+    lastName: string;
+    role: string
+}
+
 export interface AuthResultDto {
     token: string;
+    user: User
 }
 
 export interface RoleDto {
@@ -30,6 +37,7 @@ export interface RoleDto {
 export interface EditProfileDto {
     age?: number;
     bio?: string;
+    gender?: string;
     weight?: number;
     height?: number;
     phoneNumber?: string;
@@ -60,4 +68,17 @@ export const editProfile = async(editProfile: EditProfileDto, authToken: string)
     });
 
     return response.data;
+};
+
+export const getUserDetails = async (authToken: string): Promise<User> => {
+    const response = await axios.get<User>(`${API_URL}/details`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.token}`
+        }
+    });
+    return response.data;
+};
+
+export const logout = (): void => {
+    localStorage.removeItem(localStorage.token);
 };
