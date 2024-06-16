@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTrainers, TrainerDto, PaginationParameters, searchTrainers, searchByWorkouts  } from '../services/trainerService';
+import { getTrainers, TrainerDto, PaginationParameters, searchTrainers, searchByWorkout  } from '../services/trainerService';
 import { useAuth } from '../contexts/AuthContext';
 import {  WorkoutTitleDto, fetchWorkoutsTitles } from '../services/workoutService';
 
@@ -77,7 +77,7 @@ const handleTrainerClick = (id: string) => {
 const handleFilter = async () => {
     try {
       if (selectedWorkout) {
-        const trainersData = await searchByWorkouts(selectedWorkout, authToken!);
+        const trainersData = await searchByWorkout(selectedWorkout, localStorage.token);
         setTrainers(trainersData);
       } else {
         console.log('No filters selected');
