@@ -46,7 +46,6 @@ const Register: React.FC = () => {
             password,
             firstName,
             lastName,
-            gender,
             role: {
                 id: roleId
             }
@@ -110,15 +109,6 @@ const Register: React.FC = () => {
               fullWidth
               required
             />
-            <TextField
-              label="Gender"
-              type="text"
-              value={gender}
-              onChange={e => setGender(e.target.value)}
-              margin="normal"
-              fullWidth
-              required
-            />
             <FormControl fullWidth margin="normal">
               <InputLabel id="role-select-label">Role</InputLabel>
               <Select
@@ -148,25 +138,5 @@ const Register: React.FC = () => {
       );
     };
 
-//     return (
-//         <div className="register-container">
-//             <h2>Register</h2>
-//             <form className="register-form" onSubmit={e => { e.preventDefault(); handleRegister(); }}>
-//                 <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-//                 <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
-//                 <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} required />
-//                 <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} required />
-//                 <input type="text" placeholder="Gender" value={gender} onChange={e => setGender(e.target.value)} required />
-//                 <select value={roleId} onChange={e => setRoleId(e.target.value)} required>
-//                     <option value="" disabled>Select Role</option>
-//                     {roles.map(role => (
-//                         <option key={role.id} value={role.id}>{role.name}</option>
-//                     ))}
-//                 </select>
-//                 <button type="submit">Register</button>
-//             </form>
-//         </div>
-//     );
-// };
 
 export default Register;
