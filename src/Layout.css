@@ -22,25 +22,20 @@
   align-items: center;
 }
 
-.header nav a {
+.header nav a,
+.header nav button {
   margin: 0 10px;
   color: white;
   text-decoration: none;
-}
-
-.header nav a:hover {
-  text-decoration: underline;
-}
-
-.header nav button,
-.header nav button:hover,
-.header nav button:focus {
   background: none;
   border: none;
   cursor: pointer;
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
+  font: inherit;
+}
+
+.header nav a:hover,
+.header nav button:hover {
+  text-decoration: underline;
 }
 
 .main {
@@ -49,8 +44,8 @@
 }
 
 .footer {
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: #7bdd60;
+  color: white;
   padding: 20px 0;
   text-align: center;
 }
