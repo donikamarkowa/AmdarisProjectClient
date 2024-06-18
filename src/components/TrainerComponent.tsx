@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getTrainers, TrainerDto, PaginationParameters, searchTrainers, searchByWorkout  } from '../services/trainerService';
 import { useAuth } from '../contexts/AuthContext';
 import {  WorkoutTitleDto, fetchWorkoutsTitles } from '../services/workoutService';
+import './TrainerComponent.css';
 
 const Trainers: React.FC = () => {
     const [trainers, setTrainers] = useState<TrainerDto[]>([]);
