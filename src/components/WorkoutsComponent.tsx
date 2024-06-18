@@ -37,7 +37,7 @@ const Workouts: React.FC = () => {
     useEffect(() => {
         const fetchCategoriesData = async () => {
             try {
-                const categoriesData = await fetchCategories(authToken!);
+                const categoriesData = await fetchCategories();
                 setCategories(categoriesData);
             } catch (error) {
                 console.error('Error fetching categories:', error);
@@ -46,7 +46,7 @@ const Workouts: React.FC = () => {
 
         const fetchTrainersData = async () => {
             try {
-                const trainersData = await fetchTrainers(authToken!);
+                const trainersData = await fetchTrainers();
                 setTrainers(trainersData);
             } catch (error) {
                 console.error('Error fetching trainers:', error);
