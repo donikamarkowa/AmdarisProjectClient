@@ -4,6 +4,7 @@ import { getWorkouts, WorkoutDto, PaginationParameters, searchByCategory, search
 import { useAuth } from '../contexts/AuthContext';
 import { fetchCategories, WorkoutCategoryDto } from '../services/categoryService';
 import { fetchTrainers, TrainerFullNameDto } from '../services/trainerService';
+import './WorkoutsComponents.css';
 
 const Workouts: React.FC = () => {
     const [workouts, setWorkouts] = useState<WorkoutDto[]>([]);
