@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7048/api'; 
+const API_URL = 'https://localhost:7048/api/Trainer'; 
 
 export interface TrainerDto {
   id: string;
@@ -34,7 +34,7 @@ export interface TrainerDetailsDto {
 
 
 export const getTrainers = async (paginationParameters: PaginationParameters, authToken: string): Promise<TrainerDto[]> => {
-  const response = await axios.get<TrainerDto[]>(`${API_URL}/Trainer/all`, {
+  const response = await axios.get<TrainerDto[]>(`${API_URL}/all`, {
     params: paginationParameters,
     headers: {
       Authorization: `Bearer ${authToken}` 
@@ -44,7 +44,7 @@ export const getTrainers = async (paginationParameters: PaginationParameters, au
 };
 
 export const getTrainerDetails = async (id: string, authToken: string): Promise<TrainerDetailsDto> => {
-  const response = await axios.get<TrainerDetailsDto>(`${API_URL}/Trainer/details?id=${id}`, {
+  const response = await axios.get<TrainerDetailsDto>(`${API_URL}/details?id=${id}`, {
     params: { id },
     headers: {
       Authorization: `Bearer ${localStorage.token}` 
@@ -54,7 +54,7 @@ export const getTrainerDetails = async (id: string, authToken: string): Promise<
 };
 
 export const getTrainersByLocationId = async (locationId: string, authToken: string): Promise<TrainerDto[]> => {
-  const response = await axios.get<TrainerDto[]>(`${API_URL}/Trainer/location?id=${locationId}`, {
+  const response = await axios.get<TrainerDto[]>(`${API_URL}/location?id=${locationId}`, {
     headers: {
       Authorization: `Bearer ${authToken}`
     }
@@ -62,12 +62,9 @@ export const getTrainersByLocationId = async (locationId: string, authToken: str
   return response.data;
 };
 
-export const fetchTrainers = async (authToken: string): Promise<TrainerFullNameDto[]> =>{
-  const response = await axios.get<TrainerFullNameDto[]>(`${API_URL}/Trainer/allNames`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.token}` 
-    }
-  });
+export const fetchTrainers = async (): Promise<TrainerFullNameDto[]> =>{
+  const response = await axios.get<TrainerFullNameDto[]>(`${API_URL}/allNames`
+  );
   return response.data;
 };
 
