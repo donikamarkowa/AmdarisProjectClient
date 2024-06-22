@@ -7,6 +7,19 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  padding: 10px;
+}
+
+.search-container h2{
+  font-size: 40px;
+}
+
+.search-placeholder {
+  margin-right: 10px;
+}
+
+.filter-placeholder {
+  margin-right: 10px;
 }
 
 .search-container input[type="text"],
@@ -17,33 +30,37 @@
 
 .search-container button {
   padding: 8px 16px;
-  background-color: #7bdd60;
+  background-color: #0b7152;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .search-container button:hover {
-  background-color: #69c04a;
+  background-color: #074a36;
 }
 
 .workouts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid layout */
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 65px;
 }
 
 .workout-card {
   background-color: white;
   border-radius: 5px;
-  padding: 10px;
+  padding-bottom: 42px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
 .workout-card:hover {
-  transform: translateY(-5px); /* Lift card on hover */
+  transform: translateY(-5px); 
+}
+
+.workout-card h3{
+  padding-left: 16px;
 }
 
 .workout-image-container {
@@ -73,23 +90,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 .pagination-controls button {
   padding: 8px 16px;
-  background-color: #7bdd60;
+  background-color: #0b7152;
   color: white;
   border: none;
   cursor: pointer;
-  margin: 0 5px; /* Add margin between buttons */
+  margin: 0 5px; 
 }
 
 .pagination-controls button:hover {
-  background-color: #69c04a;
+  background-color: #074a36;
 }
 
 .pagination-controls span {
-  margin: 0 10px; /* Add spacing around page number */
+  margin: 0 10px; 
   font-size: 16px;
+}
+
+#input-work{
+  background: white;
+  border: 1px solid black;
+  border-radius: 8px;
 }
