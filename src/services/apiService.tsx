@@ -82,3 +82,13 @@ export const getUserDetails = async (authToken: string): Promise<User> => {
 export const logout = (): void => {
     localStorage.removeItem(localStorage.token);
 };
+
+export const getProfile = async(authToken: string): Promise<EditProfileDto> =>{
+    const response = await axios.get<EditProfileDto>(`${API_URL}/profile`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.token}`
+        }
+    });
+
+    return response.data;
+};
