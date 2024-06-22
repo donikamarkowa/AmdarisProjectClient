@@ -91,19 +91,19 @@ const Workouts: React.FC = () => {
 
     const handleFilter = async () => {
         try {
-          if (selectedCategory) {
-            const workoutsData = await searchByCategory(selectedCategory, authToken!);
-            setWorkouts(workoutsData);
-          } else if (selectedTrainer) {
-            const workoutsData = await searchByTrainer(selectedTrainer, authToken!);
-            setWorkouts(workoutsData);
-          } else {
-            console.log('No filters selected');
-          }
+            if (selectedCategory) {
+                const workoutsData = await searchByCategory(selectedCategory, authToken!);
+                setWorkouts(workoutsData);
+            } else if (selectedTrainer) {
+                const workoutsData = await searchByTrainer(selectedTrainer, authToken!);
+                setWorkouts(workoutsData);
+            } else {
+                console.log('No filters selected');
+            }
         } catch (error) {
-          console.error('Error filtering workouts:', error);
+            console.error('Error filtering workouts:', error);
         }
-      };
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -112,29 +112,34 @@ const Workouts: React.FC = () => {
 
     return (
         <div className="workouts-container">
-        <h2>All Workouts</h2>
-        <div className="search-container">
-          <input type="text" placeholder="Search by name" value={searchCriteria} onChange={(e) => setSearchCriteria(e.target.value)} />
-          <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-            <option value="">All Categories</option>
-            {categories.map(category => (
-              <option key={category.id} value={category.id}>{category.name}</option>
-            ))}
-          </select>
-          <select value={selectedTrainer} onChange={(e) => setSelectedTrainer(e.target.value)}>
-            <option value="">All Trainers</option>
-            {trainers.map(trainer => (
-              <option key={trainer.id} value={trainer.id}>{trainer.firstName} {trainer.lastName}</option>
-            ))}
-          </select>
-          <button onClick={handleSearch}>Search</button>
-          <button onClick={() => { handleFilter()}}>Filter</button>
-        </div>
+            <h2>Workouts</h2>
+            <div className="search-container">
+                <div className="search-placeholder">
+                    <input id='input-work' type="text" placeholder="Search by name" value={searchCriteria} onChange={(e) => setSearchCriteria(e.target.value)} />
+                    <button onClick={handleSearch}>Search</button>
+                </div>
+                <div className="filter-placeholder">
+                    <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                        <option value="">Categories</option>
+                        {categories.map(category => (
+                            <option key={category.id} value={category.id}>{category.name}</option>
+                        ))}
+                    </select>
+                    <select value={selectedTrainer} onChange={(e) => setSelectedTrainer(e.target.value)}>
+                        <option value="">Trainers</option>
+                        {trainers.map(trainer => (
+                            <option key={trainer.id} value={trainer.id}>{trainer.firstName} {trainer.lastName}</option>
+                        ))}
+                    </select>
+                    <button onClick={() => { handleFilter() }}>Filter</button>
+                </div>
+            </div>
             <div className="workouts-grid">
                 {workouts.map(workout => (
                     <div key={workout.id} className="workout-card" onClick={(e) => {
                         e.preventDefault();
-                        handleWorkoutClick(workout.id)}}>
+                        handleWorkoutClick(workout.id)
+                    }}>
                         <img src={workout.picture} alt={workout.title} className="workout-image" />
                         <h3>{workout.title}</h3>
                     </div>
