@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getWorkoutDetails, WorkoutDetailsDto } from '../services/workoutService';
 import { useAuth } from '../contexts/AuthContext';
 import LocationComponent from './LocationComponent'; 
+import './WorkoutDetailsComponent.css';
 
 
 const WorkoutDetails: React.FC = () => {
@@ -12,6 +13,14 @@ const WorkoutDetails: React.FC = () => {
     const [workout, setWorkout] = useState<WorkoutDetailsDto | null>(null);
     const [loading, setLoading] = useState(true);
 
+
+    const formatValue = (value: string | number | null | undefined, suffix?: string) => {
+        if (value === null || value === undefined) return '';
+        if (suffix === '€') {
+            return `${value} ${suffix}`;
+        }
+        return suffix ? `${value} ${suffix}` : value.toString();
+    };
 
     useEffect(() => {
         if (!localStorage.token) {
@@ -55,11 +64,11 @@ const WorkoutDetails: React.FC = () => {
             <img src={workout.picture} alt={workout.title} className="workout-image" />
             <p>{workout.description}</p>
             <p>Equipment Needed: {workout.equipmentNeeded}</p>
-            <p>Duration: {workout.duration}</p>
+            <p>Duration: {formatValue(workout.duration, 'minutes')}</p>
             <p>Gender: {workout.gender}</p>
             <p>Intensity Level: {workout.intensityLevel}</p>
             <p>Status: {workout.status}</p>
-            <p>Price: {workout.price}</p>
+            <p>Price: {formatValue(workout.price, '€')}</p>
             <p>Category: {workout.workoutCategory}</p>
 
             <LocationComponent workoutId={workoutId!} />
