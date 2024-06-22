@@ -10,35 +10,34 @@
 
 .login-title {
   margin-bottom: 1rem;
-  color: #7bdd60; /* Updated title color */
+  color: #0b7152; 
 }
 
 .login-input {
   margin-bottom: 1rem;
 }
 
-/* Override MUI TextField focus color */
 .login-input .MuiInput-underline:after {
-  border-bottom-color: #7bdd60; 
+  border-bottom-color: #0b7152;
 }
 
 .login-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #7bdd60; 
+  border-color: #0b7152; 
 }
 
 .login-input .MuiInputLabel-root.Mui-focused {
-  color: #7bdd60; 
+  color: #0b7152; 
 }
 
 .login-button {
   width: 100%; 
   margin-top: 1rem; 
-  background-color: #7bdd60 !important; 
+  background-color: #0b7152 !important; 
   color: white; 
 }
 
 .login-button:hover {
-  background-color: #69c04a; 
+  background-color: #0b7152; 
 }
 
 .login-button:disabled {
