@@ -20,7 +20,6 @@ const Register: React.FC = () => {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [gender, setGender] = useState('');
     const [roleId, setRoleId] = useState('');
     const [roles, setRoles] = useState<RoleDto[]>([]);
     const navigate = useNavigate();
