@@ -69,7 +69,7 @@ export const fetchTrainers = async (): Promise<TrainerFullNameDto[]> =>{
 };
 
 export const searchTrainers = async (criteria: string, paginationParameters: PaginationParameters, authToken: string): Promise<TrainerDto[]> => {
-  const response = await axios.get(`${API_URL}/Trainer/search?criteria=${criteria}`, {
+  const response = await axios.get(`${API_URL}/search?criteria=${criteria}`, {
       headers: {
           Authorization: `Bearer ${localStorage.token}`
       },
