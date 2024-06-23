@@ -16,7 +16,7 @@ const Layout: React.FC = () => {
         <div className="layout">
             <header className="header">
                 <div className="container">
-                    <h1>Workout Reservations</h1>
+                    <h1>Workie</h1>
                     <nav>
                         <a href="/">Home</a>
                         <a href="/workouts">Workouts</a>
