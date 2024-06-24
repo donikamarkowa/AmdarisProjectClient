@@ -59,23 +59,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children, initialUse
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.token;
     if (token) {
-      setAuthToken(token);
-      setIsAuthenticated(true);
-
       const fetchUserDetails = async () => {
         try {
           const userDetails = await getUserDetails(token);
           setUser(userDetails);
         } catch (error) {
           console.error('Error fetching user details:', error);
+          // Handle token errors (e.g., token expired or invalid)
+          setAuthToken(null);
+          localStorage.removeItem('token');
+          setIsAuthenticated(false);
+          setUser(null);
         }
       };
 
       fetchUserDetails();
     } else {
-      setIsAuthenticated(false); // Ensure isAuthenticated is false if no token
+      setIsAuthenticated(false); 
     }
   }, []);
 

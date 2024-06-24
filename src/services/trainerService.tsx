@@ -81,7 +81,7 @@ export const searchTrainers = async (criteria: string, paginationParameters: Pag
 };
 
 export const searchByWorkout = async (workoutId: string, authToken: string): Promise<TrainerDto[]> => {
-  const response = await axios.get(`${API_URL}/Trainer/trainersByWorkout`, {
+  const response = await axios.get(`${API_URL}/trainersByWorkout`, {
     params: { id: workoutId},
       headers: {
           Authorization: `Bearer ${localStorage.token}`

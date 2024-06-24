@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Grid, Card, CardContent } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, Button } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { getCarouselPhotos } from '../services/workoutService'; 
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
+    const { user } = useAuth();
     const [photos, setPhotos] = useState<string[]>([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log('User role:', user?.role);
+      }, [user]);
 
     useEffect(() => {
         const fetchPhotos = async () => {
@@ -20,10 +28,14 @@ const HomePage: React.FC = () => {
         fetchPhotos();
     }, []);
 
+    const handleAddLocationClick = () => {
+        navigate('/add-location');
+    };
+
     return (
         <Container maxWidth="md" sx={{ mt: 5 }}>
             <Typography variant="h4" align="center" gutterBottom>
-                Welcome to Workout Reservations
+                Welcome to Workie
             </Typography>
             <Typography variant="body1" align="center" gutterBottom>
                 Book your workouts with ease and reach your fitness goals!
@@ -47,7 +59,7 @@ const HomePage: React.FC = () => {
             </Carousel>
             <Grid container spacing={3} justifyContent="center" sx={{ mt: 4 }}>
                 <Grid item xs={12} sm={6} md={4}>
-                    <Card>
+                    <Card sx={{ height: '100%' }}>
                         <CardContent>
                             <Typography variant="h5" gutterBottom>
                                 Explore Workouts
@@ -59,7 +71,7 @@ const HomePage: React.FC = () => {
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
-                    <Card>
+                    <Card sx={{ height: '100%' }}>
                         <CardContent>
                             <Typography variant="h5" gutterBottom>
                                 Professional Trainers
@@ -71,7 +83,7 @@ const HomePage: React.FC = () => {
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
-                    <Card>
+                    <Card sx={{ height: '100%' }}>
                         <CardContent>
                             <Typography variant="h5" gutterBottom>
                                 Manage Your Profile
@@ -83,6 +95,16 @@ const HomePage: React.FC = () => {
                     </Card>
                 </Grid>
             </Grid>
+            {user && user.role === 'Admin' && (
+                <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 4 }}
+                    onClick={handleAddLocationClick}
+                >
+                    Add Location
+                </Button>
+            )}
         </Container>
     );
 };

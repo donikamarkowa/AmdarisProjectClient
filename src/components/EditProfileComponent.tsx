@@ -11,6 +11,7 @@ const EditProfileForm: React.FC = () => {
   const [formData, setFormData] = useState<EditProfileDto>({
     age: undefined,
     bio: '',
+    gender: '',
     weight: undefined,
     height: undefined,
     phoneNumber: '',
@@ -24,6 +25,7 @@ const EditProfileForm: React.FC = () => {
         setFormData({
           age: profileData.age ?? undefined,
           bio: profileData.bio ?? '',
+          gender: profileData.gender ?? '',
           weight: profileData.weight ?? undefined,
           height: profileData.height ?? undefined,
           phoneNumber: profileData.phoneNumber ?? '',
@@ -70,6 +72,10 @@ const EditProfileForm: React.FC = () => {
           <label className="form-label">
             Bio:
             <input type="text" name="bio" value={formData.bio} onChange={handleChange} className="form-input" />
+          </label>
+          <label className="form-label">
+            Gender:
+            <input type="text" name="gender" value={formData.gender} onChange={handleChange} className="form-input" />
           </label>
           <label className="form-label">
             Weight:

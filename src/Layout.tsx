@@ -37,7 +37,7 @@ const Layout: React.FC = () => {
             </main>
             <footer className="footer">
                 <div className="container">
-                    <p>&copy; 2024 Workout Reservations. All rights reserved.</p>
+                    <p>&copy; 2024 Workie. All rights reserved.</p>
                 </div>
             </footer>
         </div>

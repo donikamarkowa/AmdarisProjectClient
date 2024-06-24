@@ -5,6 +5,7 @@ import { getLocationsByWorkoutId, LocationDto } from '../services/locationServic
 import { getTrainersByLocationId, TrainerFullNameDto } from '../services/trainerService';
 import { getAllSchedules, ScheduleDto } from '../services/scheduleService';
 import { createBooking } from '../services/bookingService';
+import './LocationComponent.css';
 
 interface LocationComponentProps {
   workoutId: string;
@@ -21,6 +22,7 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
   const [selectedTrainer, setSelectedTrainer] = useState<string>('');
   const [schedules, setSchedules] = useState<ScheduleDto[]>([]);
   const [selectedSchedule, setSelectedSchedule] = useState<string>('');
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
   
 
   useEffect(() => {
@@ -121,8 +123,10 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
   const handleBookingConfirmation = async () => {
     try {
       await createBooking(workoutId, selectedSchedule);
+      alert('Booking successful!');
+      navigate('/workouts');
     } catch (error) {
-      console.error('Error creating booking:', error);
+      alert('Failed to create booking.');
     }
   };
 
@@ -135,7 +139,7 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
   const filteredAddresses = locations.filter(location => location.city === selectedCity);
 
   return (
-    <div>
+    <div className="location-container">
       <div>
         <label htmlFor="city">City:</label>
         <select id="city" value={selectedCity} onChange={handleCityChange}>
@@ -191,13 +195,15 @@ const Location: React.FC<LocationComponentProps> = ({ workoutId }) => {
       )}
 
       {selectedSchedule && (
-      <div>
-        <button onClick={handleBookingConfirmation}>Confirm Booking</button>
-        <button onClick={handleCancelBooking}>Cancel Booking</button>
-      </div>
+        <div className="location-buttons">
+          <button className="location-button" onClick={handleBookingConfirmation}>Confirm Booking</button>
+          <button className="location-cancel-button" onClick={handleCancelBooking}>Cancel Booking</button>
+        </div>
       )}
+
+      {alertMessage && <div className="alert-message">{alertMessage}</div>}
     </div>
-);
+  );
 };
 
 export default Location;

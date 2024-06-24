@@ -4,6 +4,7 @@ import { getWorkoutDetails, WorkoutDetailsDto } from '../services/workoutService
 import { useAuth } from '../contexts/AuthContext';
 import LocationComponent from './LocationComponent'; 
 import './WorkoutDetailsComponent.css';
+import  backgroundImage from '../assets/background.jpg';
 
 
 const WorkoutDetails: React.FC = () => {
@@ -59,21 +60,25 @@ const WorkoutDetails: React.FC = () => {
     }
 
     return (
-        <div className="workout-details-container">
-            <h2>{workout.title}</h2>
-            <img src={workout.picture} alt={workout.title} className="workout-image" />
-            <p>{workout.description}</p>
-            <p>Equipment Needed: {workout.equipmentNeeded}</p>
-            <p>Duration: {formatValue(workout.duration, 'minutes')}</p>
-            <p>Gender: {workout.gender}</p>
-            <p>Intensity Level: {workout.intensityLevel}</p>
-            <p>Status: {workout.status}</p>
-            <p>Price: {formatValue(workout.price, '€')}</p>
-            <p>Category: {workout.workoutCategory}</p>
+        <>
+            <div className="page-background" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+            <div className="workout-details-container">
+                <h2>{workout.title}</h2>
+                <img src={workout.picture} alt={workout.title} className="workout-image" />
+                <p>{workout.description}</p>
+                <p><span className="detail-label">Equipment Needed:</span> {workout.equipmentNeeded}</p>
+                <p><span className="detail-label">Duration:</span> {workout.duration}</p>
+                <p><span className="detail-label">Gender:</span> {workout.gender}</p>
+                <p><span className="detail-label">Intensity Level:</span> {workout.intensityLevel}</p>
+                <p><span className="detail-label">Status:</span> {workout.status}</p>
+                <p><span className="detail-label">Price:</span> {formatValue(workout.price, '€')}</p>
+                <p><span className="detail-label">Category:</span> {workout.workoutCategory}</p>
 
-            <LocationComponent workoutId={workoutId!} />
-        </div>
+                <LocationComponent workoutId={workoutId!} />
+            </div>
+        </>
     );
 };
+
 
 export default WorkoutDetails;

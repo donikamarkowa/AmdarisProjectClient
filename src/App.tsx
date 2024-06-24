@@ -13,12 +13,13 @@ import TrainerDetailsComponent from './components/TrainerDetailsComponent'
 import EditProfileComponent from './components/EditProfileComponent';
 import Layout from './Layout.tsx';
 import './global.css';
+import AddLocationForm from './components/AddLocation.tsx';
 
 
 const App: React.FC = () => {
     return (
         <Router>
-            <AuthProvider>
+            <AuthProvider initialUser={null}>
                 <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route path="/" Component={HomePage}/>
@@ -29,6 +30,7 @@ const App: React.FC = () => {
                   <Route path="/workout/details/:id" Component={WorkoutDetailsComponent} />
                   <Route path="/trainers" Component={TrainerComponent} />
                   <Route path="/trainer/details/:id" Component={TrainerDetailsComponent} />
+                  <Route path="/add-location" element={<AddLocationForm />} />
                 </Route>
                 </Routes>
             </AuthProvider>

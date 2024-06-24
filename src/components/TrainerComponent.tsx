@@ -93,19 +93,24 @@ const handleFilter = async () => {
         return <div>Loading...</div>;
     }
 
+
     return (
         <div className="trainers-container">
-        <h2>All Trainers</h2>
+        <h2>Trainers</h2>
         <div className="search-container">
-          <input type="text" placeholder="Search by name" value={searchCriteria} onChange={(e) => setSearchCriteria(e.target.value)} />
-          <select value={selectedWorkout} onChange={(e) => setSelectedWorkout(e.target.value)}>
-            <option value="">All Workouts</option>
-            {workouts.map(workout => (
-              <option key={workout.id} value={workout.id}>{workout.title}</option>
-            ))}
-          </select>
-          <button onClick={handleSearch}>Search</button>
-          <button onClick={() => { handleFilter()}}>Filter</button>
+            <div className="search-placeholder">
+                <input id="input-trainer" type="text" placeholder="Search by name" value={searchCriteria} onChange={(e) => setSearchCriteria(e.target.value)} />
+                <button onClick={handleSearch}>Search</button>
+            </div>
+            <div className="filter-placeholder">
+                <select value={selectedWorkout} onChange={(e) => setSelectedWorkout(e.target.value)}>
+                <option value="">Workouts</option>
+                {workouts.map(workout => (
+                <option key={workout.id} value={workout.id}>{workout.title}</option>
+                ))}
+            </select>
+            <button onClick={() => { handleFilter()}}>Filter</button>
+          </div>
         </div>
             <div className="trainers-grid">
                 {trainers.map(trainer => (

@@ -7,6 +7,19 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
+    padding: 10px;
+  }
+
+  .search-container h2{
+    font-size: 40px;
+  }
+  
+  .search-placeholder {
+    margin-right: 10px;
+  }
+  
+  .filter-placeholder {
+    margin-right: 10px;
   }
   
   .search-container input[type="text"],
@@ -17,40 +30,55 @@
   
   .search-container button {
     padding: 8px 16px;
-    background-color: #7bdd60;
+    background-color:#0b7152 ;
     color: white;
     border: none;
     cursor: pointer;
   }
   
   .search-container button:hover {
-    background-color: #69c04a;
+    background-color: #074a36;
   }
   
   .trainers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid layout */
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 65px;
   }
   
   .trainer-card {
     background-color: white;
     border-radius: 5px;
-    padding: 10px;
+    padding-bottom: 42px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease;
   }
   
   .trainer-card:hover {
-    transform: translateY(-5px); /* Lift card on hover */
+    transform: translateY(-5px);
+  }
+
+  .trainer-card h3{
+    padding-left: 16px;
+  }  
+
+  .trainer-image-container {
+    height: 100%;
+    overflow: hidden;
+    border-radius: 5px;
   }
   
   .trainer-image {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 5px 5px 0 0; /* Rounded corners on top */
+    height: 100%;
+    object-fit: cover; 
+  }
+
+  .trainer-title {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
   }
   
   .trainer-details {
@@ -62,29 +90,11 @@
     font-size: 18px;
     font-weight: bold;
   }
-  
-  .pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+
+  #input-trainer{
+    background: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    color: black;
   }
-  
-  .pagination-controls button {
-    padding: 8px 16px;
-    background-color: #7bdd60;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 0 5px; /* Add margin between buttons */
-  }
-  
-  .pagination-controls button:hover {
-    background-color: #69c04a;
-  }
-  
-  .pagination-controls span {
-    margin: 0 10px; /* Add spacing around page number */
-    font-size: 16px;
-  }
-  
+

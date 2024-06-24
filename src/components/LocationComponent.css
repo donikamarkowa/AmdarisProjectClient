@@ -1,0 +1,68 @@
+/* LocationComponent.css */
+
+.location-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.location-container div {
+  margin-bottom: 20px;
+}
+
+.location-container label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.location-container select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.location-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.location-button,
+.location-cancel-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.location-button {
+  background-color: #0b7152;
+  color: white;
+}
+
+.location-button:hover {
+  background-color: #09543c;
+}
+
+.location-cancel-button {
+  background-color: #e57373;
+  color: white;
+}
+
+.location-cancel-button:hover {
+  background-color: #d32f2f;
+}
+
+.alert-message {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #e57373;
+}
