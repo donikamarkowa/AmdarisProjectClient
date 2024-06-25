@@ -75,7 +75,7 @@ const EditProfileForm: React.FC = () => {
           </label>
           <label className="form-label">
             Gender:
-            <input type="text" name="gender" value={formData.gender} onChange={handleChange} className="form-input" />
+            <input type="text" name="gender" value={formData.gender || ''} onChange={handleChange} className="form-input" />
           </label>
           <label className="form-label">
             Weight:
