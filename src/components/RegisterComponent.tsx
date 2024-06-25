@@ -13,7 +13,18 @@ import {
     Select,
     MenuItem,
     CircularProgress,
+    styled
   } from '@mui/material';
+
+  const CustomButton = styled(Button)({
+    width: '100%',
+    marginTop: '1rem',
+    backgroundColor: '#0b7152',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#0b7152',
+    },
+  });
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -128,9 +139,9 @@ const Register: React.FC = () => {
               </Select>
             </FormControl>
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-              <Button variant="contained" type="submit" disabled={isLoading}>
+              <CustomButton variant="contained" type="submit" disabled={isLoading}>
                 {isLoading ? <CircularProgress size={24} color="secondary" /> : 'Register'}
-              </Button>
+              </CustomButton>
             </Box>
           </form>
         </Container>
